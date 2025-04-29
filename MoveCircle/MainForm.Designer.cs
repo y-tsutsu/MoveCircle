@@ -112,7 +112,7 @@
             restartButton.TabIndex = 5;
             restartButton.Text = "再スタート";
             restartButton.UseVisualStyleBackColor = true;
-            restartButton.Click += restartButton_Click;
+            restartButton.Click += RestartButton_Click;
             // 
             // selectPictureBox
             // 
@@ -122,7 +122,7 @@
             selectPictureBox.Size = new Size(275, 50);
             selectPictureBox.TabIndex = 4;
             selectPictureBox.TabStop = false;
-            selectPictureBox.MouseClick += selectPictureBox_MouseClick;
+            selectPictureBox.MouseClick += SelectPictureBox_MouseClick;
             // 
             // label3
             // 
@@ -176,7 +176,7 @@
             // timer
             // 
             timer.Interval = 20;
-            timer.Tick += timer_Tick;
+            timer.Tick += Timer_Tick;
             // 
             // MainForm
             // 

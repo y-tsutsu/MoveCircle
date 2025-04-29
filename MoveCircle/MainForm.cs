@@ -58,7 +58,7 @@ namespace MoveCircle
             timer.Start();
         }
 
-        private void selectPictureBox_MouseClick(object sender, MouseEventArgs e)
+        private void SelectPictureBox_MouseClick(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Left) return;
             int selectCircle = (e.X - BallOffset) / selectPictureBox.Height;
@@ -79,13 +79,13 @@ namespace MoveCircle
             }
         }
 
-        private void restartButton_Click(object sender, EventArgs e)
+        private void RestartButton_Click(object sender, EventArgs e)
         {
             canvas = null;
             MainForm_Load(sender, e);
         }
 
-        private void timer_Tick(object sender, EventArgs e)
+        private void Timer_Tick(object sender, EventArgs e)
         {
             if (balls == null) return;
             foreach (var ball in balls)

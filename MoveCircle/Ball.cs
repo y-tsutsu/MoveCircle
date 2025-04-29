@@ -6,36 +6,27 @@ using System.Threading.Tasks;
 
 namespace MoveCircle
 {
-    internal class Ball
+    internal class Ball(PictureBox pb, Bitmap cv, Brush cl, string st, string fn)
     {
         private const int radius = 40;
 
-        private string text;
+        private readonly string text = st;
 
-        private string fontName;
+        private readonly string fontName = fn;
 
-        private Brush brushColor;
+        private readonly Brush brushColor = cl;
 
-        private PictureBox pictureBox;
+        private readonly PictureBox pictureBox = pb;
 
-        private Bitmap canvas;
+        private readonly Bitmap canvas = cv;
 
-        private Point position = new Point(0, 0);
+        private Point position = new(0, 0);
 
-        private Point previous = new Point(0, 0);
+        private Point previous = new(0, 0);
 
-        private Point direction = new Point(1, 1);
+        private Point direction = new(1, 1);
 
         public int Pitch { get; set; } = radius / 2;
-
-        public Ball(PictureBox pb, Bitmap cv, Brush cl, string st, string fn)
-        {
-            pictureBox = pb;
-            canvas = cv;
-            brushColor = cl;
-            text = st;
-            fontName = fn;
-        }
 
         public void PutCircle(int x, int y)
         {
