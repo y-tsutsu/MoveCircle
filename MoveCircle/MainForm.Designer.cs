@@ -156,6 +156,7 @@
             textHunt.Name = "textHunt";
             textHunt.Size = new Size(45, 36);
             textHunt.TabIndex = 0;
+            textHunt.TextAlign = HorizontalAlignment.Center;
             // 
             // mainPictureBox
             // 
@@ -167,6 +168,7 @@
             mainPictureBox.SizeMode = PictureBoxSizeMode.Zoom;
             mainPictureBox.TabIndex = 5;
             mainPictureBox.TabStop = false;
+            mainPictureBox.MouseClick += mainPictureBox_MouseClick;
             // 
             // timer
             // 
