@@ -44,12 +44,12 @@ namespace MoveCircle
             using (var g = Graphics.FromImage(canvas))
             {
                 g.FillEllipse(brushColor, x, y, radius * 2, radius * 2);
-                g.DrawString(text, new Font(fontName, radius), Brushes.Black, x + 4, y + 12, new StringFormat());
+                g.DrawString(text, new Font(fontName, radius), Brushes.Black, x + 4, y + 4, new StringFormat());
             }
             pictureBox.Image = canvas;
         }
 
-        public void DeleteCircle()
+        private void DeleteCircle()
         {
             previous = (previous == new Point(0, 0)) ? position : previous;
             using (var g = Graphics.FromImage(canvas))

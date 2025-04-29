@@ -86,9 +86,11 @@
             // 
             // textTimer
             // 
+            textTimer.BackColor = Color.White;
             textTimer.Font = new Font("Yu Gothic UI", 16F, FontStyle.Regular, GraphicsUnit.Point, 128);
             textTimer.Location = new Point(808, 17);
             textTimer.Name = "textTimer";
+            textTimer.ReadOnly = true;
             textTimer.Size = new Size(130, 36);
             textTimer.TabIndex = 1;
             textTimer.TextAlign = HorizontalAlignment.Right;
@@ -151,9 +153,11 @@
             // 
             // textHunt
             // 
+            textHunt.BackColor = Color.White;
             textHunt.Font = new Font("Yu Gothic UI", 16F, FontStyle.Regular, GraphicsUnit.Point, 128);
             textHunt.Location = new Point(12, 17);
             textHunt.Name = "textHunt";
+            textHunt.ReadOnly = true;
             textHunt.Size = new Size(45, 36);
             textHunt.TabIndex = 0;
             textHunt.TextAlign = HorizontalAlignment.Center;
@@ -168,7 +172,6 @@
             mainPictureBox.SizeMode = PictureBoxSizeMode.Zoom;
             mainPictureBox.TabIndex = 5;
             mainPictureBox.TabStop = false;
-            mainPictureBox.MouseClick += mainPictureBox_MouseClick;
             // 
             // timer
             // 

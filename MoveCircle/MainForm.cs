@@ -1,16 +1,30 @@
+using System.Diagnostics;
+
 namespace MoveCircle
 {
     public partial class MainForm : Form
     {
         private Bitmap? canvas;
 
-        private string correnctText = "荻";
+        private readonly string correctText = "荻";
 
-        private Ball balls;
+        private readonly string mistakeText = "萩";
 
-        private string fontName;
+        private Ball[]? balls;
+
+        private string[]? texts;
+
+        private readonly Brush[] ballColors = [Brushes.LightPink, Brushes.LightBlue, Brushes.LightGray, Brushes.LightCoral, Brushes.LightGreen];
+
+        private string? fontName;
 
         private double nowTime = 0;
+
+        private readonly int ballCount = 5;
+
+        private int randomResult = 0;
+
+        private const int BallOffset = 10;
 
         public MainForm()
         {
@@ -20,33 +34,64 @@ namespace MoveCircle
         private void MainForm_Load(object sender, EventArgs e)
         {
             DrawCircleSelectPictureBox();
-            DrawMainPictureBox(Brushes.Gray, correnctText);
-            textHunt.Text = correnctText;
+            DrawMainPictureBox(Brushes.Gray, correctText);
+            Debug.Assert(canvas is not null);
+            textHunt.Text = correctText;
             fontName = textHunt.Font.Name;
-            balls = new Ball(mainPictureBox, canvas, Brushes.LightBlue, correnctText, fontName);
-            balls.PutCircle(100, 100);
+            balls = new Ball[ballCount];
+            texts = new string[ballCount];
+            for (int i = 0; i < ballCount; i++)
+            {
+                texts[i] = mistakeText;
+            }
+            randomResult = new Random().Next(ballCount);
+            texts[randomResult] = correctText;
+            for (int i = 0; i < ballCount; i++)
+            {
+                balls[i] = new Ball(mainPictureBox, canvas, ballColors[i], texts[i], fontName);
+            }
+            foreach (var ball in balls)
+            {
+                ball.PutCircle(new Random().Next(mainPictureBox.Width), new Random().Next(mainPictureBox.Height));
+            }
             nowTime = 0;
             timer.Start();
         }
 
         private void selectPictureBox_MouseClick(object sender, MouseEventArgs e)
         {
-
+            if (e.Button != MouseButtons.Left) return;
+            int selectCircle = (e.X - BallOffset) / selectPictureBox.Height;
+            if (selectCircle == randomResult)
+            {
+                timer.Stop();
+                DrawMainPictureBox(Brushes.Red, "〇");
+            }
+            else
+            {
+                if (balls == null) return;
+                foreach (var ball in balls)
+                {
+                    ball.Pitch /= 2;
+                }
+                nowTime += 10;
+                DrawMainPictureBox(Brushes.Red, correctText);
+            }
         }
 
         private void restartButton_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void mainPictureBox_MouseClick(object sender, MouseEventArgs e)
-        {
-
+            canvas = null;
+            MainForm_Load(sender, e);
         }
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            balls.Move();
+            if (balls == null) return;
+            foreach (var ball in balls)
+            {
+                ball.Move();
+            }
             nowTime += 0.02;
             textTimer.Text = nowTime.ToString("0.00");
         }
@@ -58,7 +103,10 @@ namespace MoveCircle
             var selectCanvas = new Bitmap(width, height);
             using (var g = Graphics.FromImage(selectCanvas))
             {
-                g.FillEllipse(Brushes.LightBlue, 0, 0, height, height);
+                for (int i = 0; i < ballCount; i++)
+                {
+                    g.FillEllipse(ballColors[i], i * height + BallOffset, 0, height, height);
+                }
             }
             selectPictureBox.Image = selectCanvas;
         }
